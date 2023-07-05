@@ -20,7 +20,7 @@ void normalKeyHandler(unsigned char key, int x, int y)
 		sorting = true;
 		mode = SortingAlg::QUICK;
 		break;
-	case 'c': // Key 'c' for comparison
+	case 53:
 		sorting = true;
 		mode = SortingAlg::COMPARE;
 		break;

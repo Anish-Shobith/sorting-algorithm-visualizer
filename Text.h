@@ -5,7 +5,7 @@
 #include <GL/glut.h>
 #include "window.h"
 
-extern Window win;
+extern int width, height;
 
 /**
  * @class Text

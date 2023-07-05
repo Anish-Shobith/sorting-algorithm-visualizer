@@ -40,30 +40,30 @@ void Text::drawSortName(std::string sortname, int xcoord, int ycoord)
 void Text::drawKeyGuide(int xcoord, int ycoord)
 {
 	glColor3f(0.2, 0.2, 0.2);
-	this->glWrite(win.width / 2 - 100 + xcoord, win.height - ycoord + 50,
+	this->glWrite(width / 2 - 100 + xcoord, height - ycoord + 50,
 				  (int *)GLUT_BITMAP_HELVETICA_18, "Key Guide:");
 
 	glColor3f(0.1, 0.1, 0.9);
-	this->glWrite(win.width / 2 - 225 + xcoord, win.height - ycoord + 25,
+	this->glWrite(width / 2 - 225 + xcoord, height - ycoord + 25,
 				  (int *)GLUT_BITMAP_HELVETICA_18, "1 - Bubble sort");
 
 	glColor3f(0.1, 0.1, 0.9);
-	this->glWrite(win.width / 2 - 225 + xcoord, win.height - ycoord,
+	this->glWrite(width / 2 - 225 + xcoord, height - ycoord,
 				  (int *)GLUT_BITMAP_HELVETICA_18, "2 - Merge sort");
 
 	glColor3f(0.1, 0.1, 0.9);
-	this->glWrite(win.width / 2 - 225 + xcoord, win.height - ycoord - 25,
+	this->glWrite(width / 2 - 225 + xcoord, height - ycoord - 25,
 				  (int *)GLUT_BITMAP_HELVETICA_18, "3 - Heap sort");
 
 	glColor3f(0.1, 0.1, 0.9);
-	this->glWrite(win.width / 2 - 225 + xcoord, win.height - ycoord - 50,
+	this->glWrite(width / 2 - 225 + xcoord, height - ycoord - 50,
 				  (int *)GLUT_BITMAP_HELVETICA_18, "4 - Quick sort");
 
 	glColor3f(0.1, 0.1, 0.9);
-	this->glWrite(win.width / 2 - 50 + xcoord, win.height - ycoord + 25,
+	this->glWrite(width / 2 - 50 + xcoord, height - ycoord + 25,
 				  (int *)GLUT_BITMAP_HELVETICA_18, "R - Reshuffle array");
 
 	glColor3f(0.1, 0.1, 0.9);
-	this->glWrite(win.width / 2 - 50 + xcoord, win.height - ycoord,
+	this->glWrite(width / 2 - 50 + xcoord, height - ycoord,
 				  (int *)GLUT_BITMAP_HELVETICA_18, "S - Stop sorting");
 }
