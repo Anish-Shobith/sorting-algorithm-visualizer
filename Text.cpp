@@ -10,30 +10,30 @@ void Text::glWrite(float x, float y, int *font, std::string text)
 void Text::drawOperationCount(int n, float x, float y, int arrsize)
 {
 	glColor3f(0.2, 0.2, 0.2);
-	this->glWrite(x, win.height - y,
+	this->glWrite(x,  y,
 				  (int *)GLUT_BITMAP_TIMES_ROMAN_24, "Size of an array:");
 
 	glColor3f(0.4, 0.3, 0.8);
-	this->glWrite(x + 20, win.height - y - 30,
+	this->glWrite(x + 50, y - 30,
 				  (int *)GLUT_BITMAP_TIMES_ROMAN_24, std::to_string(arrsize));
 
 	glColor3f(0.2, 0.2, 0.2);
-	this->glWrite(x, win.height - y - 60,
+	this->glWrite(x + 180, y,
 				  (int *)GLUT_BITMAP_TIMES_ROMAN_24, "Number of permutations:");
 
 	glColor3f(0.7, 0.2, 0.2);
-	this->glWrite(x + 20, win.height - y - 90,
+	this->glWrite(x + 300, y - 35,
 				  (int *)GLUT_BITMAP_TIMES_ROMAN_24, std::to_string(n));
 }
 
 void Text::drawSortName(std::string sortname, int xcoord, int ycoord)
 {
 	glColor3f(0.2, 0.2, 0.2);
-	this->glWrite(win.width - xcoord, win.height - ycoord,
+	this->glWrite(xcoord, ycoord,
 				  (int *)GLUT_BITMAP_TIMES_ROMAN_24, "Sorting algorithm:");
 
 	glColor3f(0.8, 0, 0.8);
-	this->glWrite(win.width - xcoord + 200, win.height - ycoord,
+	this->glWrite( xcoord + 200, ycoord,
 				  (int *)GLUT_BITMAP_TIMES_ROMAN_24, sortname);
 }
 
