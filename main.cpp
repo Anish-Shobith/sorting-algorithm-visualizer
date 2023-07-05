@@ -7,7 +7,7 @@
 #include "Text.h"
 #include "window.h"
 
-const int w = 1280, h = 720; // default screen resolution
+const int w = 1280, h = 1000; // default screen resolution
 bool sorting = false;		 // default program state
 int sorting_speed = 1;		 // milliseconds beetween gameloop ticks
 
@@ -21,7 +21,21 @@ Window win(w, h, "Sorting algorithms visualizer");
  * @details - Sorting algorithm being used.
  * @param 
  */
-Sort arr(50, 500, 50, 50, 1, 1);
+
+int locations[][2] = {
+	{20, 50},
+	{20, 470},
+	{640, 50},
+	{640, 470},
+};
+
+int offsetX = 100, offsetY = 330;
+
+Sort arr1(100, 10, locations[0][0], locations[0][1], 1, 30);
+Sort arr2(100, 10, locations[1][0], locations[1][1], 1, 30);
+Sort arr3(100, 10, locations[2][0], locations[2][1], 1, 30);
+Sort arr4(100, 10, locations[3][0], locations[3][1], 1, 30);
+
 Text ui;						 // on screen text UI
 SortingAlg mode = SortingAlg::RESET;
 
@@ -54,7 +68,7 @@ int main(int argc, char **argv)
 	glutCreateWindow("Sorting algorithms visualizer");
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0, 1280, 0, 720);
+	gluOrtho2D(0, w, 0, h);
 	srand(time(NULL));
 
 	// GLut func initialization
@@ -78,10 +92,20 @@ void render()
 {
 	glClearColor(0.8, 0.8, 0.8, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
-	arr.drawArray();
-	ui.drawOperationCount(arr.getOperationCounter(), 20, 40, arr.getArraySize());
-	ui.drawSortName(enumToString(mode), 400, 50);
-	ui.drawKeyGuide(25, 90);
+	arr1.drawArray();
+	arr2.drawArray();
+	arr3.drawArray();
+	arr4.drawArray();
+	ui.drawOperationCount(arr1.getOperationCounter(), locations[0][0] + offsetX, locations[0][1] + offsetY, arr1.getArraySize());
+	ui.drawOperationCount(arr2.getOperationCounter(), locations[1][0] + offsetX, locations[1][1] + offsetY, arr1.getArraySize());
+	ui.drawOperationCount(arr3.getOperationCounter(), locations[2][0] + offsetX, locations[2][1] + offsetY, arr1.getArraySize());
+	ui.drawOperationCount(arr4.getOperationCounter(), locations[3][0] + offsetX, locations[3][1] + offsetY, arr1.getArraySize());
+	ui.drawSortName(enumToString(SortingAlg::BUBBLE), locations[0][0] + offsetX + 50, locations[0][1] + offsetY + 40);
+	ui.drawSortName(enumToString(SortingAlg::MERGE), locations[1][0] + offsetX + 50, locations[1][1] + offsetY + 40);
+	ui.drawSortName(enumToString(SortingAlg::HEAP), locations[2][0] + offsetX + 50, locations[2][1] + offsetY + 40);
+	ui.drawSortName(enumToString(SortingAlg::QUICK), locations[3][0] + offsetX + 50, locations[3][1] + offsetY + 40);
+
+	ui.drawKeyGuide(25, 80);
 	glFlush();
 }
 
@@ -90,7 +114,11 @@ void update()
 	if (sorting && (mode == SortingAlg::RESET))
 	{
 		sorting = false;
-		arr.reshuffleArray();
+		arr1.reshuffleArray();
+		arr2.reshuffleArray();
+		arr3.reshuffleArray();
+		arr4.reshuffleArray();
+
 	}
 	else if (sorting && (mode == SortingAlg::STOP))
 	{
@@ -98,6 +126,9 @@ void update()
 	}
 	else if (sorting)
 	{
-		sorting = arr.tick(mode);
+		sorting |= arr1.tick(SortingAlg::BUBBLE);
+		sorting |= arr2.tick(SortingAlg::MERGE);
+		sorting |= arr3.tick(SortingAlg::HEAP);
+		sorting |= arr4.tick(SortingAlg::QUICK);
 	}
 }
