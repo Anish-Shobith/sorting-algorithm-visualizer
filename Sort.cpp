@@ -21,6 +21,8 @@ Sort::Sort(unsigned size, unsigned maxvalue, int xcoord, int ycoord, float xscal
 	MergeSort merge;
 	HeapSort heap(this->arr_size);
 	QuickSort quick(this->arr);
+	this->quick = quick;
+	this->heap = heap;
 }
 
 void Sort::reshuffleArray()
