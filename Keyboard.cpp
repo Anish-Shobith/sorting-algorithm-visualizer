@@ -1,5 +1,14 @@
 #include "Keyboard.h"
 
+/**
+ * Handles a normal key press event.
+ *
+ * @param key the key that was pressed
+ * @param x the x-coordinate of the mouse cursor
+ * @param y the y-coordinate of the mouse cursor
+ *
+ * @throws None
+ */
 void normalKeyHandler(unsigned char key, int x, int y)
 {
 	switch (key)

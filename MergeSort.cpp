@@ -9,6 +9,17 @@ MergeSort::MergeSort()
 	this->SortedBlock = std::vector<int>(RightBorder - LeftBorder);
 	this->MergeIterator = 0;
 }
+/**
+ * Sorts the given vector using the merge sort algorithm.
+ *
+ * @param arr the vector to be sorted
+ * @param i the index of the last element sorted
+ * @param operation_counter the number of operations performed
+ *
+ * @return true if an element was sorted, false otherwise
+ *
+ * @throws None
+ */
 bool MergeSort::tick(std::vector<int> &arr, int &i, int &operation_counter)
 {
 	while (BlockSizeIterator < arr.size())
@@ -74,16 +85,25 @@ bool MergeSort::tick(std::vector<int> &arr, int &i, int &operation_counter)
 		BlockIterator = 0;
 		BlockSizeIterator *= 2;
 	}
-	return true;
+	return false;
 }
 
+/**
+ * Rebuilds the MergeSort object.
+ *
+ * @param None
+ *
+ * @return None
+ *
+ * @throws None
+ */
 void MergeSort::rebuild()
 {
-	this->SortedBlock.clear();
-	this->BlockSizeIterator = 1;
-	this->BlockIterator = 0;
-	this->LeftBlockIterator = 0;
-	this->RightBlockIterator = 0;
-	this->SortedBlock = std::vector<int>(RightBorder - LeftBorder);
-	this->MergeIterator = 0;
+    SortedBlock.clear();
+    BlockSizeIterator = 1;
+    BlockIterator = 0;
+    LeftBlockIterator = 0;
+    RightBlockIterator = 0;
+    SortedBlock.resize(RightBorder - LeftBorder);
+    MergeIterator = 0;
 }
