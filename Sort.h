@@ -35,10 +35,10 @@ public:
 	void reshuffleArray();
 	bool tick(SortingAlg alg);
 
+	void drawString(const std::string &str);
 	void drawArray();
 	int getOperationCounter();
 	int getArraySize();
-	float getProgressPercentage();
 
 private:
 	std::vector<int> arr;

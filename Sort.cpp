@@ -68,24 +68,49 @@ bool Sort::tick(SortingAlg alg)
 
 void Sort::drawArray()
 {
-	// Draw all array elements with green color
-	glColor3f(0, 1, 0);
-	for (unsigned j = 0; j < arr.size(); j++)
-	{
-		glRectf(
-			this->x + (this->x_scale * j * 6),
-			this->y,
-			this->x + 3 + (this->x_scale * j * 6),
-			this->y + this->y_scale * arr[j]);
-	}
+    // Add labels
+    glColor3f(1, 1, 1);
+    glRasterPos2f(this->x + 20, this->y - 20);
+    drawString("Array Index");
 
-	// Draw current iteration with red color
-	glColor3f(0.1, 0.5, 1);
-	glRectf(
-		this->x + (this->x_scale * this->i * 6),
-		this->y,
-		this->x + 3 + (this->x_scale * this->i * 6),
-		this->y + this->y_scale * arr[this->i]);
+    glRasterPos2f(this->x + 30, this->y + (this->y_scale * max_value) - 5);
+    drawString("Array Element Value");
+
+    // Draw all array elements with color gradient
+    for (unsigned j = 0; j < arr.size(); j++)
+    {
+        float colorScale = ((float)arr[j] / max_value); // Scale the color based on element value
+
+        // Change color based on the value
+        float red = (arr[j] >= max_value * 0.8) ? 1.0f : colorScale;
+        float green = 0.0f + colorScale;
+        float blue = colorScale;
+
+        glColor3f(0, green, 0); // Use the modified color gradient
+
+        glRectf(
+            this->x + (this->x_scale * j * 6) + 1,
+            this->y + 1,
+            this->x + 3 + (this->x_scale * j * 6) - 1,
+            this->y + this->y_scale * arr[j] - 1);
+    }
+
+    // Add animation for current iteration
+    glColor3f(1, 0, 0); // Use red color for the pointer
+
+    glRectf(
+        this->x + (this->x_scale * this->i * 6) + 1,
+        this->y + 1,
+        this->x + 3 + (this->x_scale * this->i * 6) - 1,
+        this->y + this->y_scale * arr[this->i] - 1);
+}
+
+void Sort::drawString(const std::string &str)
+{
+	for (char c : str)
+	{
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, c); // Use TIMES_ROMAN_24 font
+	}
 }
 
 int Sort::getOperationCounter()
@@ -96,15 +121,4 @@ int Sort::getOperationCounter()
 int Sort::getArraySize()
 {
 	return this->arr.size();
-}
-
-float Sort::getProgressPercentage()
-{
-    int sortedCount = 0;
-    for (unsigned i = 0; i < arr.size(); i++)
-    {
-        if (arr[i] == i)
-            sortedCount++;
-    }
-    return static_cast<float>(sortedCount) / arr.size();
 }

@@ -62,10 +62,10 @@ void render()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_QUADS);
-	glColor3f(0.2f, 0.2f, 0.2f); // Dark gray color at the top-left
+	glColor3f(0.1f, 0.1f, 0.1f); // Dark gray color at the top-left
 	glVertex2f(0, height);
 	glVertex2f(width, height);
-	glColor3f(0.05f, 0.05f, 0.1f); // Dark blue color at the bottom-right
+	glColor3f(0.05f, 0.05f, 0.15f); // Dark blue color at the bottom-right
 	glVertex2f(width, 0);
 	glVertex2f(0, 0);
 	glEnd();
