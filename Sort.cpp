@@ -97,3 +97,14 @@ int Sort::getArraySize()
 {
 	return this->arr.size();
 }
+
+float Sort::getProgressPercentage()
+{
+    int sortedCount = 0;
+    for (unsigned i = 0; i < arr.size(); i++)
+    {
+        if (arr[i] == i)
+            sortedCount++;
+    }
+    return static_cast<float>(sortedCount) / arr.size();
+}

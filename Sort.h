@@ -14,6 +14,8 @@
 #include "HeapSort.h"
 #include "QuickSort.h"
 
+extern int width, height;
+
 /**
  * @class Sort
  * @brief Sort class is used to create an array of random numbers and sort it using one of the sorting algorithms.
@@ -36,6 +38,7 @@ public:
 	void drawArray();
 	int getOperationCounter();
 	int getArraySize();
+	float getProgressPercentage();
 
 private:
 	std::vector<int> arr;

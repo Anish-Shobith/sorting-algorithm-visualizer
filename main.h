@@ -53,6 +53,8 @@ inline std::string enumToString(SortingAlg alg); // convert enum state to screen
 
 extern bool sorting;	  // sorting state (sorting, stopped)
 extern int sorting_speed; // time between sorting ticks in ms
-extern const int w, h;	  // default window width, height
+extern int location[][2]; // array of locations for each element
+extern int width, height; // screen width and height
+extern int offsetX, offsetY; // offset for array location
 
 #endif					  // SORT_VISUALIZER_MAIN_H_

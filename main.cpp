@@ -5,18 +5,16 @@
 #include "main.h"
 #include "Sort.h"
 #include "Text.h"
-#include "window.h"
 
-
-int width, height;			  // screen size
-bool sorting = false;		  // default program state
-int sorting_speed = 1;		  // milliseconds beetween gameloop ticks
+int width, height;	   // screen size
+bool sorting = false;  // default program state
+int sorting_speed = 1; // milliseconds beetween gameloop ticks
 
 int locations[][2] = {
-	{20, 470},	// Bubble Sort (top left)
-	{640, 470}, // Merge Sort (top right)
-	{20, 50},	// Heap Sort (bottom left)
-	{640, 50},	// Quick sort (bottom right)
+	{20, 670},	 // Bubble Sort (top left)
+	{1335, 670}, // Merge Sort (top right)
+	{20, 150},	 // Heap Sort (bottom left)
+	{1335, 150}, // Quick sort (bottom right)
 };
 
 int offsetX = 100, offsetY = 330;
@@ -29,33 +27,12 @@ Sort arr4(200, 10, locations[3][0], locations[3][1], 1, 30);
 Text ui; // on screen text UI
 SortingAlg mode = SortingAlg::RESET;
 
-inline std::string enumToString(SortingAlg alg)
-{
-	switch (alg)
-	{
-	case SortingAlg::BUBBLE:
-		return "Bubble sort";
-	case SortingAlg::MERGE:
-		return "Merge sort";
-	case SortingAlg::HEAP:
-		return "Heap sort";
-	case SortingAlg::QUICK:
-		return "Quick sort";
-	case SortingAlg::RESET:
-		return "Array is reshuffled";
-	case SortingAlg::STOP:
-		return "Sorting stopped";
-	default:
-		return "[algorithm is not selected]";
-	}
-}
-
 int main(int argc, char **argv)
 {
 	glutInit(&argc, argv);
 	width = glutGet(GLUT_SCREEN_WIDTH);
 	height = glutGet(GLUT_SCREEN_HEIGHT);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutInitWindowSize(width, height);
 	glutCreateWindow("Sorting algorithms visualizer");
 	glMatrixMode(GL_PROJECTION);
@@ -65,6 +42,7 @@ int main(int argc, char **argv)
 
 	// GLut func initialization
 	glutDisplayFunc(render);
+	glEnable(GL_MULTISAMPLE);
 	glutTimerFunc(sorting_speed, gameloop, 0);
 	glutKeyboardFunc(normalKeyHandler);
 
@@ -82,22 +60,22 @@ void gameloop(int = 0)
 
 void render()
 {
-	glClearColor(0.8, 0.8, 0.8, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
+	glBegin(GL_QUADS);
+	glColor3f(0.2f, 0.2f, 0.2f); // Dark gray color at the top-left
+	glVertex2f(0, height);
+	glVertex2f(width, height);
+	glColor3f(0.05f, 0.05f, 0.1f); // Dark blue color at the bottom-right
+	glVertex2f(width, 0);
+	glVertex2f(0, 0);
+	glEnd();
 	arr1.drawArray();
 	arr2.drawArray();
 	arr3.drawArray();
 	arr4.drawArray();
-	ui.drawOperationCount(arr1.getOperationCounter(), locations[0][0] + offsetX, locations[0][1] + offsetY, arr1.getArraySize());
-	ui.drawOperationCount(arr2.getOperationCounter(), locations[1][0] + offsetX, locations[1][1] + offsetY, arr1.getArraySize());
-	ui.drawOperationCount(arr3.getOperationCounter(), locations[2][0] + offsetX, locations[2][1] + offsetY, arr1.getArraySize());
-	ui.drawOperationCount(arr4.getOperationCounter(), locations[3][0] + offsetX, locations[3][1] + offsetY, arr1.getArraySize());
-	ui.drawSortName(enumToString(SortingAlg::BUBBLE), locations[0][0] + offsetX + 50, locations[0][1] + offsetY + 40);
-	ui.drawSortName(enumToString(SortingAlg::MERGE), locations[1][0] + offsetX + 50, locations[1][1] + offsetY + 40);
-	ui.drawSortName(enumToString(SortingAlg::HEAP), locations[2][0] + offsetX + 50, locations[2][1] + offsetY + 40);
-	ui.drawSortName(enumToString(SortingAlg::QUICK), locations[3][0] + offsetX + 50, locations[3][1] + offsetY + 40);
-	ui.drawKeyGuide(25, 80);
+	ui.draw();
 	glFlush();
+	glutSwapBuffers();
 }
 
 void update()
